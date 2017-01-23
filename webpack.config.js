@@ -17,7 +17,10 @@ const config = {
         exclude: [/node_modules/]
       }
     ]
-  }
+  },
+  devServer: {
+    contentBase: path.join(__dirname, "public")
+  },
 }
 
 module.exports = config;
