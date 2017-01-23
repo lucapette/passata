@@ -13,7 +13,8 @@ const config = {
         test: /\.(js|jsx)$/,
         loader: 'babel-loader',
         options: {
-          presets: ["es2015", "react"]
+          presets: ["es2015", "react"],
+          plugins: ["transform-flow-strip-types"]
         },
         exclude: [/node_modules/]
       }
