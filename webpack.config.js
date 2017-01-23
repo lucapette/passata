@@ -1,17 +1,20 @@
-var path = require('path');
+var path = require("path");
 
 const config = {
-  entry: './src/App.js',
+  entry: "./src/App.js",
   output: {
-    path: path.resolve(__dirname, 'public'),
-    filename: 'App.js'
+    path: path.resolve(__dirname, "public"),
+    filename: "App.js"
   },
   module: {
     rules: [
       {
-        exclude: 'node_modules',
         test: /\.(js|jsx)$/,
-        use: 'babel-loader'
+        loader: 'babel-loader',
+        options: {
+          presets: ["es2015", "react"]
+        },
+        exclude: [/node_modules/]
       }
     ]
   }
