@@ -1,0 +1,9 @@
+{
+  "name": "passata",
+  "version": "0.0.1",
+  "description": "Passata is a small app for the pomodoro technique",
+  "main": "src/App.js",
+  "repository": "git@gitlab.com:lucapette/passata.git",
+  "author": "lucapette <lucapette@gmail.com>",
+  "license": "MIT"
+}
