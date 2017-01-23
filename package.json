@@ -5,5 +5,9 @@
   "main": "src/App.js",
   "repository": "git@gitlab.com:lucapette/passata.git",
   "author": "lucapette <lucapette@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2"
+  }
 }
