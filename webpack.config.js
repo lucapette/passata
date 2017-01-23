@@ -1,6 +1,7 @@
 var path = require("path");
 
 const config = {
+  devtool: "#source-maps",
   entry: "./src/App.js",
   output: {
     path: path.resolve(__dirname, "public"),
