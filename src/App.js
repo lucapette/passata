@@ -2,11 +2,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-function world(): string {
-  return "world"
-}
+import Layout from './Layout';
 
-ReactDOM.render(
-  <h1>Hello {world()}</h1>,
-  document.getElementById('root')
-);
+const mountNode = document.getElementById('root');
+
+ReactDOM.render(<Layout />, mountNode);
