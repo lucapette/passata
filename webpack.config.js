@@ -16,7 +16,12 @@ const config = {
           presets: ["es2015", "react"],
           plugins: ["transform-flow-strip-types"]
         },
-        exclude: [/node_modules/]
+        exclude: /node_modules/
+      },
+      {
+        test: /\.css$/,
+        exclude: /node_modules/,
+        use: ["style-loader", "css-loader"]
       }
     ]
   },
