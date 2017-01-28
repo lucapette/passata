@@ -4,7 +4,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import Layout from './Layout';
-import { Button } from 'semantic-ui-react'
+import { Button } from 'semantic-ui-react';
+
+import 'semantic-ui-css/semantic.css';
+import 'semantic-ui-css/semantic.js';
 
 const ButtonExampleEmphasis = () => (
   <div>

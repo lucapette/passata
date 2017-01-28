@@ -1,4 +1,5 @@
 var path = require("path");
+var webpack = require("webpack");
 
 const config = {
   devtool: "#source-maps",
@@ -20,11 +21,19 @@ const config = {
       },
       {
         test: /\.css$/,
-        exclude: /node_modules/,
         use: ["style-loader", "css-loader"]
+      },
+      {
+        test: /\.(eot|woff|woff2|ttf|svg|png|jpg)$/,
+        use: ["url-loader"]
       }
     ]
   },
+  plugins: [
+    new webpack.ProvidePlugin({
+      'jQuery': 'jquery'
+    })
+  ],
   devServer: {
     contentBase: path.join(__dirname, "public")
   },
