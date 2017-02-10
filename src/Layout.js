@@ -1,8 +1,32 @@
 //@flow
-import React from 'react';
+import React, { Component } from 'react'
+import { Menu, Segment, Icon } from 'semantic-ui-react'
 
-export default class Layout extends React.Component {
+export default class Layout extends Component {
+  handleItemClick = (e, item) =>
+    console.log(item)
+
   render() {
-    return <h1>Hello world!</h1>
+    return (
+      <div>
+        <Segment attached>
+          This is a segment
+        </Segment>
+
+        <Menu icon='labeled' compact attached='bottom'>
+          <Menu.Item
+            onClick={this.handleItemClick}>
+            <Icon name='video play outline' />
+            Start
+          </Menu.Item>
+
+          <Menu.Item
+            onClick={this.handleItemClick}>
+            <Icon name='bar chart' />
+            Stats
+          </Menu.Item>
+        </Menu>
+      </div>
+    )
   }
 }
