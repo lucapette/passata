@@ -5,7 +5,7 @@ Cook your pomodoros!
 ## What is this?
 
 `passata` is a small application for the pomodoro technique. I'm using it as a
-playground to learn more about modern frontend technologies.
+playground to learn more about React.js and its eco-system.
 
 # License
 
