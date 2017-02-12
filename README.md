@@ -1,13 +1,12 @@
 # Passata
 
-Cook your pomodoro!
+Cook your pomodoros!
 
 ## What is this?
 
-`passata` is a tiny pomodoro application that I'm working on so I can learn more
-about modern frontend technologies.
+`passata` is a small application for the pomodoro technique. I'm using it as a
+playground to learn more about modern frontend technologies.
 
-I am writing a series of blog posts about my experience in case you're
-interested:
+# License
 
-- [Hello React.js](add-link)
+[MIT License](/LICENSE) Copyright (c) [2017] [Luca Pette](http://lucapette.me)
