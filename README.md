@@ -2,10 +2,11 @@
 
 Cook your pomodoros!
 
-## What is this?
+## Current status of the project
 
 `passata` is a small application for the pomodoro technique. I'm using it as a
-playground to learn more about React.js and its eco-system.
+playground to learn more about React.js and its eco-system. At the moment,
+it's not in a usable state.
 
 # License
 
