@@ -1,31 +1,26 @@
 //@flow
 import React, { Component } from 'react'
-import { Menu, Segment, Icon } from 'semantic-ui-react'
+import { Menu, Icon, Grid } from 'semantic-ui-react'
 
 export default class Layout extends Component {
-  handleItemClick = (e, item) =>
-    console.log(item)
-
   render() {
     return (
-      <div>
-        <Segment attached>
-          This is a segment
-        </Segment>
-
-        <Menu icon='labeled' compact attached='bottom'>
-          <Menu.Item
-            onClick={this.handleItemClick}>
-            <Icon name='video play outline' />
-            Start
-          </Menu.Item>
-
-          <Menu.Item
-            onClick={this.handleItemClick}>
-            <Icon name='bar chart' />
-            Stats
-          </Menu.Item>
-        </Menu>
+      <div id="container">
+        <Grid celled>
+          <Grid.Row columns={1} stretched>
+            <Grid.Column>
+              This is a segment
+            </Grid.Column>
+          </Grid.Row>
+          <Grid.Row columns={2} stretched textAlign="center">
+            <Grid.Column>
+              <Icon name='video play outline' fitted color="red" size="large"/>
+            </Grid.Column>
+            <Grid.Column>
+              <Icon name='bar chart' fitted color="red" size="large" />
+            </Grid.Column>
+          </Grid.Row>
+        </Grid>
       </div>
     )
   }
