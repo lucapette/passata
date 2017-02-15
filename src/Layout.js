@@ -8,7 +8,7 @@ export default class Layout extends Component {
       <div id="container">
         <Grid celled>
           <Grid.Row columns={1} stretched>
-            <Grid.Column>
+            <Grid.Column className="content">
               This is a segment
             </Grid.Column>
           </Grid.Row>
