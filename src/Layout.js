@@ -1,26 +1,27 @@
 //@flow
-import React, { Component } from 'react'
-import { Menu, Icon, Grid } from 'semantic-ui-react'
+import React, { Component } from "react"
+import { Segment } from "semantic-ui-react"
+
+import ControlPanel from "./ControlPanel"
 
 export default class Layout extends Component {
+  constructor() {
+    super();
+    this.state = {page: "home"}
+  }
+
+  changePage = (page) => {
+    this.setState({page})
+  }
+
   render() {
     return (
       <div id="container">
-        <Grid celled>
-          <Grid.Row columns={1} stretched>
-            <Grid.Column className="content">
-              This is a segment
-            </Grid.Column>
-          </Grid.Row>
-          <Grid.Row columns={2} stretched textAlign="center">
-            <Grid.Column>
-              <Icon name='video play outline' fitted color="red" size="large"/>
-            </Grid.Column>
-            <Grid.Column>
-              <Icon name='bar chart' fitted color="red" size="large" />
-            </Grid.Column>
-          </Grid.Row>
-        </Grid>
+        <Segment attached id="content">
+          This is a segment
+        </Segment>
+
+        <ControlPanel changePage={this.changePage.bind(this)} page={this.state.page}/>
       </div>
     )
   }
