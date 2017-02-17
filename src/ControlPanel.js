@@ -15,7 +15,7 @@ export default class ControlPanel extends Component {
     }
   }
 
-  currentPanel = (page) => {
+  render() {
     switch(this.props.page) {
       case "home":
         return (
@@ -43,9 +43,5 @@ export default class ControlPanel extends Component {
           </Menu>
         )
     }
-  }
-
-  render() {
-    return this.currentPanel()
   }
 }
