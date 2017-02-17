@@ -1,5 +1,7 @@
-var path = require("path");
-var webpack = require("webpack");
+const path = require("path");
+const webpack = require("webpack");
+
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 const config = {
   devtool: "#source-maps",
@@ -21,7 +23,10 @@ const config = {
       },
       {
         test: /\.css$/,
-        use: ["style-loader", "css-loader"]
+        use: ExtractTextPlugin.extract({
+          fallback: "style-loader",
+          use: "css-loader"
+        })
       },
       {
         test: /\.(eot|woff|woff2|ttf|svg|png|jpg)$/,
@@ -32,7 +37,8 @@ const config = {
   plugins: [
     new webpack.ProvidePlugin({
       'jQuery': 'jquery'
-    })
+    }),
+    new ExtractTextPlugin('styles.css'),
   ],
   devServer: {
     contentBase: path.join(__dirname, "public")
