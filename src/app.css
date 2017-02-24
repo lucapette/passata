@@ -4,3 +4,10 @@
 #content {
   min-height: 450px;
 }
+/*
+ * This is needed because of this bug:
+ * https://github.com/Semantic-Org/Semantic-UI/issues/4248
+ */
+.ui.attached.menu {
+  width: calc(100% + 1px);
+}
