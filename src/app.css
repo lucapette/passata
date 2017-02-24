@@ -3,6 +3,7 @@
 }
 #content {
   min-height: 450px;
+  padding: 0px;
 }
 /*
  * This is needed because of this bug:

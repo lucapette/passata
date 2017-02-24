@@ -2,6 +2,7 @@
 import React, { Component } from "react"
 import { Segment } from "semantic-ui-react"
 
+import ContentPanel from "./ContentPanel"
 import ControlPanel from "./ControlPanel"
 
 export default class Layout extends Component {
@@ -17,9 +18,7 @@ export default class Layout extends Component {
   render() {
     return (
       <div id="container">
-        <Segment attached id="content">
-          This is a segment
-        </Segment>
+        <ContentPanel changePage={this.changePage.bind(this)} page={this.state.page}/>
 
         <ControlPanel changePage={this.changePage.bind(this)} page={this.state.page}/>
       </div>
