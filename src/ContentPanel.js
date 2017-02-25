@@ -3,21 +3,17 @@ import React, { Component } from 'react'
 import { List, Segment, Form, Input } from 'semantic-ui-react'
 
 export default class ContentPanel extends Component {
-  handleClick = (e, item) => {
-    console.log(item.name)
-  }
-
   currentPanel = () => {
     switch(this.props.page) {
       case "home":
         return (
           <List selection divided size="big">
-            <List.Item name="Category 1" onClick={this.handleClick}>
+            <List.Item name="Category 1">
               <List.Content>
                 Category 1
               </List.Content>
             </List.Item>
-            <List.Item name="Category 2" onClick={this.handleClick}>
+            <List.Item name="Category 2">
               <List.Content>
                 Category 2
               </List.Content>
@@ -32,12 +28,12 @@ export default class ContentPanel extends Component {
       case "run":
         return (
           <List selection divided size="big">
-            <List.Item name="Note 1" onClick={this.handleClick}>
+            <List.Item name="Note 1">
               <List.Content>
                 Note one
               </List.Content>
             </List.Item>
-            <List.Item name="Note 2" onClick={this.handleClick}>
+            <List.Item name="Note 2">
               <List.Content>
                 Note two
               </List.Content>
