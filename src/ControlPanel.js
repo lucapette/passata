@@ -9,7 +9,7 @@ export default class ControlPanel extends Component {
       case "restart":
         this.props.changePage("run");
         break;
-      case "back":
+      case "void":
         this.props.changePage("home");
         break;
     }
@@ -21,24 +21,18 @@ export default class ControlPanel extends Component {
         return (
           <Menu attached="bottom" widths="2">
             <Menu.Item name="start" onClick={this.handleClick}>
-              <Icon name='video play outline' fitted color="teal" size="big"/>
+              <Icon name="video play outline" fitted color="teal" size="big"/>
             </Menu.Item>
             <Menu.Item onClick={this.handleClick}>
-              <Icon name='bar chart' fitted color="teal" size="big" />
+              <Icon name="bar chart" fitted color="teal" size="big" />
             </Menu.Item>
           </Menu>
         )
       case "run":
         return (
-          <Menu attached="bottom" widths="3">
-            <Menu.Item name="back" onClick={this.handleClick}>
-              <Icon name="arrow left" fitted color="teal" size="big"/>
-            </Menu.Item>
-            <Menu.Item name="restart" onClick={this.handleClick}>
-              <Icon name="video play outline" fitted color="teal" size="big" />
-            </Menu.Item>
-            <Menu.Item name="export" onClick={this.handleClick}>
-              <Icon name='bar chart' fitted color="teal" size="big" />
+          <Menu attached widths="1">
+            <Menu.Item name="void" onClick={this.handleClick}>
+              <Icon name="remove" fitted color="teal" size="big"/>
             </Menu.Item>
           </Menu>
         )
