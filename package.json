@@ -9,6 +9,7 @@
   "dependencies": {
     "babel-cli": "^6.22.2",
     "babel-core": "^6.22.1",
+    "babel-jest": "^19.0.0",
     "babel-loader": "^6.2.10",
     "babel-plugin-transform-class-properties": "^6.22.0",
     "babel-plugin-transform-flow-strip-types": "^6.22.0",
@@ -17,6 +18,7 @@
     "css-loader": "^0.26.1",
     "extract-text-webpack-plugin": "beta",
     "flow-bin": "^0.38.0",
+    "jest": "^19.0.2",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
     "semantic-ui-css": "^2.2.4",
@@ -29,6 +31,7 @@
   "scripts": {
     "start": "node_modules/.bin/webpack-dev-server --open",
     "build": "node_modules/.bin/webpack --config webpack.config.js",
-    "flow": "flow; test $? -eq 0 -o $? -eq 2"
+    "flow": "flow; test $? -eq 0 -o $? -eq 2",
+    "test": "jest"
   }
 }
