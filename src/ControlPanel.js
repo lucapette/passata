@@ -3,7 +3,8 @@ import React, { Component } from 'react'
 import { Icon, Menu } from 'semantic-ui-react'
 
 export default class ControlPanel extends Component {
-  handleClick = (e, item) => {
+  handleClick = (e : SyntheticEvent, item : Object ) => {
+    console.log(typeof item);
     switch(item.name) {
       case "start":
       case "restart":

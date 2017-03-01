@@ -1,3 +1,4 @@
+//@flow
 import Timer from './timer'
 
 test('it has defaults', () => {

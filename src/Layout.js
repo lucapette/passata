@@ -6,17 +6,26 @@ import ContentPanel from "./ContentPanel"
 import ProgressPanel from "./ProgressPanel"
 import ControlPanel from "./ControlPanel"
 
+type Page = 'home' | 'run';
+
 export default class Layout extends Component {
+  state: {
+    page: Page;
+    progress?: number;
+  };
+
   constructor() {
     super();
-    this.state = {page: "home"}
+    this.state = {
+      page: "home"
+    }
   }
 
-  tick = (progress) => {
+  tick = (progress : number) => {
     this.setState({progress});
   }
 
-  startTimer = (minutes = 1) => {
+  startTimer = (minutes : number = 1) => {
       var start = Date.now();
       var total = minutes * 60;
 
@@ -31,7 +40,7 @@ export default class Layout extends Component {
       }, 1000);
   }
 
-  changePage = (page) => {
+  changePage = (page : Page) => {
     if (page === "run") {
       this.startTimer();
     }
