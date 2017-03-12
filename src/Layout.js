@@ -1,10 +1,11 @@
 //@flow
-import React, { Component } from "react"
-import { Segment } from "semantic-ui-react"
+import React, { Component } from 'react'
+import { Segment } from 'semantic-ui-react'
 
-import ContentPanel from "./ContentPanel"
-import ProgressPanel from "./ProgressPanel"
-import ControlPanel from "./ControlPanel"
+import Timer from './timer'
+import ContentPanel from './ContentPanel'
+import ProgressPanel from './ProgressPanel'
+import ControlPanel from './ControlPanel'
 
 type Page = 'home' | 'run';
 
@@ -21,28 +22,18 @@ export default class Layout extends Component {
     }
   }
 
-  tick = (progress : number) => {
+  updateProgress = (progress : number) => {
+    console.log(progress);
     this.setState({progress});
-  }
-
-  startTimer = (minutes : number = 1) => {
-      var start = Date.now();
-      var total = minutes * 60;
-
-      setInterval(() => {
-        var elapsed = Math.floor((Date.now() - start) / 1000);
-
-        if (elapsed >= total || this.props.page === "home") {
-          return
-        } else {
-          this.tick(Math.floor((elapsed/total) * 100));
-        }
-      }, 1000);
   }
 
   changePage = (page : Page) => {
     if (page === "run") {
-      this.startTimer();
+      let timer = new Timer();
+
+      timer.on('tick', this.updateProgress);
+
+      timer.start();
     }
 
     this.setState({page})
