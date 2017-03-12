@@ -1,7 +1,7 @@
 //@flow
 
 type CallbackType = 'tick' | 'done';
-type Callback = (any) => void;
+type Callback = (number | void) => void;
 
 export default class Timer {
   seconds: number;
