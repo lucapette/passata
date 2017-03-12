@@ -1,6 +1,7 @@
 const path = require("path");
 const webpack = require("webpack");
 
+const FlowtypePlugin = require('flowtype-loader/plugin');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 const config = {
@@ -12,6 +13,12 @@ const config = {
   },
   module: {
     rules: [
+      {
+        test: /\.(js|jsx)$/,
+        loader: 'flowtype-loader',
+        enforce: 'pre',
+        exclude: /node_modules/
+      },
       {
         test: /\.(js|jsx)$/,
         loader: 'babel-loader',
@@ -39,6 +46,7 @@ const config = {
       'jQuery': 'jquery'
     }),
     new ExtractTextPlugin('styles.css'),
+    new FlowtypePlugin()
   ],
   devServer: {
     contentBase: path.join(__dirname, "public")
