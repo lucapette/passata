@@ -1,6 +1,8 @@
 //@flow
 import React, { Component } from 'react'
+import DocumentTitle from 'react-document-title'
 import { Segment } from 'semantic-ui-react'
+import _ from 'lodash'
 
 import Timer from './timer'
 
@@ -21,7 +23,8 @@ export default class Layout extends Component {
   constructor() {
     super();
     this.state = {
-      page: 'home'
+      page: 'home',
+      title: 'home'
     }
 
     this.timer = new Timer();
@@ -51,18 +54,20 @@ export default class Layout extends Component {
         break;
     }
 
-    this.setState({page})
+    this.setState({page: page})
   }
 
   render() {
     return (
-      <div id="container">
-        <ContentPanel changePage={this.changePage.bind(this)} page={this.state.page}/>
+      <DocumentTitle title={`${_.join(_.compact([this.state.page, this.timer.clockFormat()]), ' - ')}`}>
+        <div id="container">
+          <ContentPanel changePage={this.changePage.bind(this)} page={this.state.page}/>
 
-        <ControlPanel changePage={this.changePage.bind(this)} page={this.state.page}/>
+          <ControlPanel changePage={this.changePage.bind(this)} page={this.state.page}/>
 
-        <ProgressPanel changePage={this.changePage.bind(this)} page={this.state.page} percent={this.state.progress}/>
-      </div>
+          <ProgressPanel changePage={this.changePage.bind(this)} page={this.state.page} percent={this.state.progress}/>
+        </div>
+      </DocumentTitle>
     )
   }
 }

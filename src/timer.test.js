@@ -53,3 +53,29 @@ test('it stops correctly', () => {
 
   expect(tick).toHaveBeenCalledTimes(1);
 });
+
+describe('clockFormat', () => {
+  test('returns undefined when not running', () => {
+    var timer = new Timer();
+
+    expect(timer.clockFormat()).toBeUndefined();
+  });
+
+  test('formats no elapsed time correctly', () => {
+    var timer = new Timer();
+
+    timer.start(60);
+
+    expect(timer.clockFormat()).toEqual('01:00');
+  });
+
+  test('formats elapsed time correctly', () => {
+    var timer = new Timer();
+
+    timer.start();
+
+    jest.runTimersToTime(1000);
+
+    expect(timer.clockFormat()).toEqual('24:59');
+  });
+});

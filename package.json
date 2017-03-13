@@ -22,6 +22,7 @@
     "flowtype-loader": "^0.2.2",
     "jest": "^19.0.2",
     "react": "^15.4.2",
+    "react-document-title": "^2.0.2",
     "react-dom": "^15.4.2",
     "semantic-ui-css": "^2.2.4",
     "semantic-ui-react": "^0.64.4",
