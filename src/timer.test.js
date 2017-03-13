@@ -9,29 +9,47 @@ beforeEach(() => {
 });
 
 test('it ticks correctly', () => {
-  var timer = new Timer(1);
+  var timer = new Timer();
 
   const tick = jest.fn();
 
   timer.on('tick', tick);
 
-  timer.start();
+  timer.start(1);
 
   jest.runTimersToTime(1000);
 
-  expect(tick.mock.calls.length).toBe(1);
+  expect(tick).toHaveBeenCalledTimes(1);
 });
 
 test('it finishes correctly', () => {
-  var timer = new Timer(1);
+  var timer = new Timer();
 
   const done = jest.fn();
 
   timer.on('done', done);
 
-  timer.start();
+  timer.start(1);
 
   jest.runTimersToTime(1000);
 
-  expect(done.mock.calls.length).toBe(1);
+  expect(done).toHaveBeenCalledTimes(1);
+});
+
+test('it stops correctly', () => {
+  var timer = new Timer();
+
+  const tick = jest.fn();
+
+  timer.on('tick', tick);
+
+  timer.start(2);
+
+  jest.runTimersToTime(1000);
+
+  timer.stop();
+
+  jest.runTimersToTime(1000);
+
+  expect(tick).toHaveBeenCalledTimes(1);
 });
