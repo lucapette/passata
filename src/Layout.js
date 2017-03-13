@@ -59,7 +59,7 @@ export default class Layout extends Component {
 
   render() {
     return (
-      <DocumentTitle title={`${_.join(_.compact([this.state.page, this.timer.clockFormat()]), ' - ')}`}>
+      <DocumentTitle title={`🍅 ${_.join(_.compact([this.state.page, this.timer.clockFormat()]), ' - ')} 🍅`}>
         <div id="container">
           <ContentPanel changePage={this.changePage.bind(this)} page={this.state.page}/>
 
