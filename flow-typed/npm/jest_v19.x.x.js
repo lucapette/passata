@@ -1,7 +1,7 @@
 // flow-typed signature: adc2f239806ddd8eb09272d1b4e23cb9
 // flow-typed version: 7dc2a8971e/jest_v19.x.x/flow_>=v0.33.x
 
-type JestMockFn = { 
+type JestMockFn = {
   (...args: Array<any>): any,
   /**
    * An object for introspecting mock calls
