@@ -1,6 +1,6 @@
 //@flow
-import React, { Component } from "react"
-import { Progress } from "semantic-ui-react"
+import React, { Component } from 'react'
+import ProgressBar from './ProgressBar'
 
 export default class ProgressPanel extends Component {
   render() {
@@ -9,7 +9,7 @@ export default class ProgressPanel extends Component {
     }
 
     return (
-      <Progress attached="bottom" color="teal" percent={this.props.percent}/>
+      <ProgressBar changePage={this.props.changePage} page={this.props.page}/>
     )
   }
 }

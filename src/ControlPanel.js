@@ -5,19 +5,19 @@ import { Icon, Menu } from 'semantic-ui-react'
 export default class ControlPanel extends Component {
   handleClick = (e : SyntheticEvent, item : Object ) => {
     switch(item.name) {
-      case "start":
-      case "restart":
-        this.props.changePage("run");
+      case 'start':
+      case 'restart':
+        this.props.changePage('run');
         break;
-      case "void":
-        this.props.changePage("home");
+      case 'void':
+        this.props.changePage('home');
         break;
     }
   }
 
   render() {
     switch(this.props.page) {
-      case "home":
+      case 'home':
         return (
           <Menu attached="bottom" widths="2">
             <Menu.Item name="start" onClick={this.handleClick}>
@@ -28,7 +28,8 @@ export default class ControlPanel extends Component {
             </Menu.Item>
           </Menu>
         )
-      case "run":
+      case 'run':
+      case 'rest':
         return (
           <Menu attached widths="1">
             <Menu.Item name="void" onClick={this.handleClick}>
