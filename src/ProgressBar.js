@@ -29,8 +29,6 @@ export default class ProgressBar extends Component {
   }
 
   startBreak = () => {
-    this.timer.stop();
-
     this.timer = new Timer();
     this.timer.on('tick', this.tick);
     this.timer.start(300);

@@ -38,7 +38,7 @@ export default class Timer {
         if (callback) {
           callback();
         }
-        return
+        this.stop();
       }
     }, 1000);
   }
