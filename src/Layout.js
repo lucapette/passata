@@ -11,6 +11,7 @@ type Page = 'home' | 'run' | 'rest';
 export default class Layout extends Component {
   state: {
     page: Page;
+    selectedCategory?: string;
   };
 
   constructor() {
@@ -22,18 +23,18 @@ export default class Layout extends Component {
   }
 
   changePage = (page : Page) => {
-    this.setState({page: page})
+    this.setState({page: page});
   }
 
   render() {
     return (
       <DocumentTitle title={`🍅 ${this.state.page} 🍅`}>
         <div id="container">
-          <ContentPanel changePage={this.changePage.bind(this)} page={this.state.page}/>
+          <ContentPanel changePage={this.changePage} page={this.state.page}/>
 
-          <ControlPanel changePage={this.changePage.bind(this)} page={this.state.page}/>
+          <ControlPanel changePage={this.changePage} page={this.state.page}/>
 
-          <ProgressPanel changePage={this.changePage.bind(this)} page={this.state.page}/>
+          <ProgressPanel changePage={this.changePage} page={this.state.page}/>
         </div>
       </DocumentTitle>
     )

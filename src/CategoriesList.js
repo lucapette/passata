@@ -2,9 +2,25 @@
 import React, { Component } from 'react'
 import { List, Form, Input } from 'semantic-ui-react'
 
+class Category {
+  name: string;
+  selected: boolean;
+
+  constructor(name: string) {
+    this.name = name;
+    this.selected = false;
+  }
+
+  toJSON() {
+    return {
+      name: this.name
+    }
+  }
+}
+
 export default class CategoriesList extends Component {
   state: {
-    categories: Array<string>
+    categories: Array<Category>
   }
 
   constructor() {
@@ -20,7 +36,7 @@ export default class CategoriesList extends Component {
     let data = localStorage.getItem('categories');
 
     if (data != null) {
-      categories = JSON.parse(data);
+      categories = JSON.parse(data).map(cat => new Category(cat.name));
     }
 
     this.setState({
@@ -28,12 +44,24 @@ export default class CategoriesList extends Component {
     });
   }
 
-  handleKeyPress(event: SyntheticInputEvent) {
+  handleOnClick = (name: string) => {
+    this.state.categories.forEach((category) => category.selected = false);
+
+    let category = this.state.categories.find((cat) => cat.name == name);
+
+    if (category) {
+      category.selected = true;
+    }
+
+    this.setState({categories: this.state.categories});
+  }
+
+  handleKeyPress = (event: SyntheticInputEvent) => {
     if (event.key == 'Enter') {
       event.preventDefault();
 
       let categories = this.state.categories;
-      categories.push(event.target.value);
+      categories.push(new Category(event.target.value));
 
       localStorage.setItem('categories', JSON.stringify(categories));
       event.target.value = "";
@@ -45,11 +73,11 @@ export default class CategoriesList extends Component {
   render() {
     return (
       <List selection divided size="big">
-        {this.state.categories.map(cat => <List.Item key={cat} name={cat} content={cat}/>)}
+        {this.state.categories.map(cat => <List.Item onClick={this.handleOnClick.bind(this, cat.name)} key={cat.name} name={cat.name} active={cat.selected} content={cat.name}/>)}
 
         <List.Item>
           <List.Content>
-            <Input icon="add" fluid placeholder="New category..." onKeyPress={this.handleKeyPress.bind(this)} transparent/>
+            <Input icon="add" fluid placeholder="New category..." onKeyPress={this.handleKeyPress} transparent/>
           </List.Content>
         </List.Item>
       </List>
