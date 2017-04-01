@@ -45,13 +45,13 @@ export default class CategoriesList extends Component {
   }
 
   handleOnClick = (name: string) => {
-    this.state.categories.forEach((category) => category.selected = false);
-
-    let category = this.state.categories.find((cat) => cat.name == name);
-
-    if (category) {
-      category.selected = true;
-    }
+    this.state.categories.forEach((category) => {
+        if (category.name == name) {
+          category.selected = !category.selected;
+        } else {
+          category.selected = false;
+        }
+    });
 
     this.setState({categories: this.state.categories});
   }
@@ -73,13 +73,13 @@ export default class CategoriesList extends Component {
   render() {
     return (
       <List selection divided size="big">
-        {this.state.categories.map(cat => <List.Item onClick={this.handleOnClick.bind(this, cat.name)} key={cat.name} name={cat.name} active={cat.selected} content={cat.name}/>)}
+      {this.state.categories.map(cat => <List.Item onClick={this.handleOnClick.bind(this, cat.name)} key={cat.name} name={cat.name} active={cat.selected} content={cat.name}/>)}
 
-        <List.Item>
-          <List.Content>
-            <Input icon="add" fluid placeholder="New category..." onKeyPress={this.handleKeyPress} transparent/>
-          </List.Content>
-        </List.Item>
+      <List.Item>
+        <List.Content>
+          <Input icon="add" fluid placeholder="New category..." onKeyPress={this.handleKeyPress} transparent/>
+        </List.Content>
+      </List.Item>
       </List>
     )
   }
