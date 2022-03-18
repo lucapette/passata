@@ -1,14 +1,13 @@
+import React from "react";
 import "bulma/css/bulma.min.css";
 import { Button } from "react-bulma-components";
 
-function App() {
+const App = () => {
   return (
     <div className="App">
-      <p>
-        <Button color="primary">My Bulma button</Button>
-      </p>
+      <Button color="primary">Push me</Button>
     </div>
   );
-}
+};
 
 export default App;
