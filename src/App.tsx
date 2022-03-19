@@ -1,11 +1,15 @@
-import React from "react";
 import "bulma/css/bulma.min.css";
-import { Button } from "react-bulma-components";
+import { Footer, Content, Section } from "react-bulma-components";
 
 const App = () => {
   return (
-    <div className="App">
-      <Button color="primary">Push me</Button>
+    <div>
+      <div className="wrap">
+        <Section>
+          <Content>Yo</Content>
+        </Section>
+      </div>
+      <Footer></Footer>
     </div>
   );
 };
