@@ -1,17 +1,21 @@
 import { Navbar } from "react-bulma-components";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
+
+const navItemStyle = ({ isActive }: { isActive: Boolean }) => {
+  return `navbar-item ${isActive ? "is-active" : ""}`;
+};
 
 const Navigation = () => {
   return (
-    <Navbar>
+    <Navbar color="light">
       <Navbar.Container>
         <Navbar.Menu>
-          <Navbar.Item>
-            <Link to="/">🍅 Get it done</Link>
-          </Navbar.Item>
-          <Navbar.Item>
-            <Link to="/stats">📈 Stats</Link>
-          </Navbar.Item>
+          <NavLink className={navItemStyle} to="/">
+            🍅 Get it done
+          </NavLink>
+          <NavLink className={navItemStyle} to="/stats">
+            📈 Stats
+          </NavLink>
         </Navbar.Menu>
       </Navbar.Container>
     </Navbar>
