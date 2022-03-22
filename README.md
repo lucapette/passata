@@ -4,7 +4,8 @@ Cook your pomodoros!
 
 ## TODO
 
-- Make title change by page
+- Make favicon change contextually (aka show the time)
+- Footer is too tall
 
 ## Current status of the project
 
