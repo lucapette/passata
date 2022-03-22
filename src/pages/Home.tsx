@@ -7,6 +7,7 @@ import {
   Content,
   Form,
   Icon,
+  Level,
   Progress,
 } from "react-bulma-components";
 import Timer from "../services/timer";
@@ -18,15 +19,20 @@ enum TimerState {
   DONE,
 }
 
+const timer = new Timer();
+
 const Home = () => {
   const [clockText, setClockText] = useState("25:00");
   const [progress, setProgress] = useState(0);
-  const timer = new Timer();
+
   timer.on("tick", () => {
     setProgress((timer.elapsed / timer.secondsToRun) * 100);
     setClockText(timer.clockFormat() + "");
   });
-  timer.on("done", () => console.log("break"));
+  timer.on("done", () => {
+    setTimerState(TimerState.DONE);
+    setClockText("🎉");
+  });
 
   const [timerState, setTimerState] = useState(TimerState.NOT_READY);
   const [topic, setTopic] = useState("");
@@ -65,19 +71,32 @@ const Home = () => {
       <Columns>
         <Columns.Column size="one-third">
           <Form.Input
-            placeholder="What are you working on?"
+            placeholder="What are you working on today?"
             onKeyDown={onKeyDown}
             onChange={onChange}
             value={topic}
             disabled={timerState === TimerState.RUNNING}
           />
         </Columns.Column>
+        <Columns.Column size="two-thirds">yo</Columns.Column>
       </Columns>
       <Columns>
         <Columns.Column size="one-third">
           <Content>
-            <Progress max={100} value={progress} color="primary"></Progress>
-            {clockText}
+            <Level>
+              <Level.Item>
+                <div>
+                  <p className="heading"></p>
+                  <p className="title">{clockText}</p>
+                </div>
+              </Level.Item>
+            </Level>
+
+            <Progress
+              max={100}
+              value={progress}
+              color={timerState === TimerState.DONE ? "success" : "primary"}
+            ></Progress>
           </Content>
         </Columns.Column>
       </Columns>
