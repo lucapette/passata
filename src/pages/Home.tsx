@@ -1,6 +1,6 @@
 import "bulma/css/bulma.min.css";
 import { PlayCircle, StopCircle } from "lucide-react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Button,
   Columns,
@@ -22,6 +22,11 @@ enum TimerState {
 const timer = new Timer();
 
 const Home = () => {
+  useEffect(() => {
+    const title = document.title.split(" - ").at(-1);
+
+    document.title = `${clockText} - ${title}`;
+  });
   const [clockText, setClockText] = useState("25:00");
   const [progress, setProgress] = useState(0);
 
