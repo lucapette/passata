@@ -6,6 +6,7 @@ import Page from "./components/Page";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Stats from "./pages/Stats";
+import Settings from "./pages/Settings";
 
 ReactDOM.render(
   <React.StrictMode>
@@ -24,6 +25,14 @@ ReactDOM.render(
           element={
             <Page title="Stats">
               <Stats />
+            </Page>
+          }
+        ></Route>
+        <Route
+          path="/settings"
+          element={
+            <Page title="Settings">
+              <Settings />
             </Page>
           }
         ></Route>

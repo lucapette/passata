@@ -16,6 +16,9 @@ const Navigation = () => {
           <NavLink className={navItemStyle} to="/stats">
             📈 Stats
           </NavLink>
+          <NavLink className={navItemStyle} to="/settings">
+            ⚙️ Settings
+          </NavLink>
         </Navbar.Menu>
       </Navbar.Container>
     </Navbar>
