@@ -1,8 +1,7 @@
-const Pomodoro = (completedAt: number, duration: number) => {
-  return {
-    completedAt,
-    duration,
-  };
-};
+interface Pomodoro {
+  topic: string;
+  completedAt: number;
+  duration: number;
+}
 
 export default Pomodoro;

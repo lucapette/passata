@@ -3,7 +3,6 @@ import { PlayCircle, StopCircle } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import {
   Button,
-  Card,
   Columns,
   Content,
   Form,
@@ -11,19 +10,28 @@ import {
   Level,
   Progress,
 } from "react-bulma-components";
-import Timer from "../services/timer";
-import Pomodoro from "../models/pomodoro";
+import Pomodoro from "../../models/pomodoro";
+import Timer from "../../services/timer";
+import PomodoroList from "./PomodoroList";
 
-enum PomodoroState {
+enum ClockState {
   NOT_READY,
   READY,
   RUNNING,
   DONE,
 }
 
-const pomodoros = [
-  Pomodoro(Date.parse("2022/03/23 08:00"), 25 * 60),
-  Pomodoro(Date.parse("2022/03/23 08:30"), 25 * 60),
+const pomodoros: Pomodoro[] = [
+  {
+    topic: "client 1",
+    completedAt: Date.parse("2022/03/23 08:00"),
+    duration: 25 * 60,
+  },
+  {
+    topic: "client 2",
+    completedAt: Date.parse("2022/03/23 08:30"),
+    duration: 25 * 60,
+  },
 ];
 
 const timer = new Timer();
@@ -43,21 +51,21 @@ const Home = () => {
   });
 
   timer.on("done", () => {
-    setTimerState(PomodoroState.DONE);
+    setTimerState(ClockState.DONE);
     setClockText("🎉");
   });
 
-  const [timerState, setTimerState] = useState(PomodoroState.NOT_READY);
+  const [timerState, setTimerState] = useState(ClockState.NOT_READY);
   const [topic, setTopic] = useState("");
 
   const startPomodoro = () => {
-    setTimerState(PomodoroState.RUNNING);
+    setTimerState(ClockState.RUNNING);
     setTopic("");
     timer.start();
   };
 
   const stopPomodoro = () => {
-    setTimerState(PomodoroState.NOT_READY);
+    setTimerState(ClockState.NOT_READY);
     timer.stop();
     setProgress(0);
     setClockText("25:00");
@@ -72,9 +80,7 @@ const Home = () => {
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTopic(e.currentTarget.value);
     setTimerState(
-      e.currentTarget.value.length > 0
-        ? PomodoroState.READY
-        : PomodoroState.NOT_READY
+      e.currentTarget.value.length > 0 ? ClockState.READY : ClockState.NOT_READY
     );
   };
   return (
@@ -86,13 +92,11 @@ const Home = () => {
             onKeyDown={onKeyDown}
             onChange={onChange}
             value={topic}
-            disabled={timerState === PomodoroState.RUNNING}
+            disabled={timerState === ClockState.RUNNING}
           />
         </Columns.Column>
         <Columns.Column size="two-thirds">
-          {pomodoros.map((p, i) => (
-            <Card key={i}>{p.completedAt}</Card>
-          ))}
+          <PomodoroList data={pomodoros} />
         </Columns.Column>
       </Columns>
       <Columns>
@@ -109,7 +113,7 @@ const Home = () => {
             <Progress
               max={100}
               value={progress}
-              color={timerState === PomodoroState.DONE ? "success" : "primary"}
+              color={timerState === ClockState.DONE ? "success" : "primary"}
             ></Progress>
           </Content>
         </Columns.Column>
@@ -118,7 +122,7 @@ const Home = () => {
         <Columns.Column size="one-third">
           <Button.Group>
             <Button
-              disabled={timerState !== PomodoroState.READY}
+              disabled={timerState !== ClockState.READY}
               onClick={startPomodoro}
             >
               <Icon>
@@ -126,7 +130,7 @@ const Home = () => {
               </Icon>
             </Button>
             <Button
-              disabled={timerState !== PomodoroState.RUNNING}
+              disabled={timerState !== ClockState.RUNNING}
               onClick={stopPomodoro}
             >
               <Icon>
