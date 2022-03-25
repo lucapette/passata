@@ -1,17 +1,9 @@
 import "bulma/css/bulma.min.css";
-import { PlayCircle, StopCircle } from "lucide-react";
 import React, { useEffect, useState } from "react";
-import {
-  Button,
-  Columns,
-  Content,
-  Form,
-  Icon,
-  Level,
-  Progress,
-} from "react-bulma-components";
+import { Columns, Form } from "react-bulma-components";
 import Pomodoro from "../../models/pomodoro";
 import Timer from "../../services/timer";
+import ClockModal from "./ClockModal";
 import PomodoroList from "./PomodoroList";
 
 enum ClockState {
@@ -51,22 +43,23 @@ const Home = () => {
   });
 
   timer.on("done", () => {
-    setTimerState(ClockState.DONE);
+    setClockState(ClockState.DONE);
     setClockText("🎉");
+    setTopic("");
   });
 
-  const [timerState, setTimerState] = useState(ClockState.NOT_READY);
+  const [clockState, setClockState] = useState(ClockState.NOT_READY);
   const [topic, setTopic] = useState("");
 
   const startPomodoro = () => {
-    setTimerState(ClockState.RUNNING);
-    setTopic("");
+    setClockState(ClockState.RUNNING);
     timer.start();
   };
 
   const stopPomodoro = () => {
-    setTimerState(ClockState.NOT_READY);
+    setClockState(ClockState.NOT_READY);
     timer.stop();
+    setTopic("");
     setProgress(0);
     setClockText("25:00");
   };
@@ -79,7 +72,7 @@ const Home = () => {
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTopic(e.currentTarget.value);
-    setTimerState(
+    setClockState(
       e.currentTarget.value.length > 0 ? ClockState.READY : ClockState.NOT_READY
     );
   };
@@ -92,54 +85,20 @@ const Home = () => {
             onKeyDown={onKeyDown}
             onChange={onChange}
             value={topic}
-            disabled={timerState === ClockState.RUNNING}
+            disabled={clockState === ClockState.RUNNING}
           />
         </Columns.Column>
         <Columns.Column size="two-thirds">
           <PomodoroList data={pomodoros} />
         </Columns.Column>
       </Columns>
-      <Columns>
-        <Columns.Column size="one-third">
-          <Content>
-            <Level>
-              <Level.Item>
-                <div>
-                  <p className="title">{clockText}</p>
-                </div>
-              </Level.Item>
-            </Level>
-
-            <Progress
-              max={100}
-              value={progress}
-              color={timerState === ClockState.DONE ? "success" : "primary"}
-            ></Progress>
-          </Content>
-        </Columns.Column>
-      </Columns>
-      <Columns>
-        <Columns.Column size="one-third">
-          <Button.Group>
-            <Button
-              disabled={timerState !== ClockState.READY}
-              onClick={startPomodoro}
-            >
-              <Icon>
-                <PlayCircle />
-              </Icon>
-            </Button>
-            <Button
-              disabled={timerState !== ClockState.RUNNING}
-              onClick={stopPomodoro}
-            >
-              <Icon>
-                <StopCircle />
-              </Icon>
-            </Button>
-          </Button.Group>
-        </Columns.Column>
-      </Columns>
+      <ClockModal
+        topic={topic}
+        show={clockState === ClockState.RUNNING}
+        progress={progress}
+        text={clockText}
+        stopClock={stopPomodoro}
+      />
     </>
   );
 };
