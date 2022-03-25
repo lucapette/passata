@@ -20,17 +20,15 @@ const ClockModal: React.FC<ClockModalProps> = (props) => {
   return (
     <Modal show={props.show}>
       <Modal.Card>
-        <Modal.Card.Header>
+        <Modal.Card.Header showClose={false}>
           <Modal.Card.Title>{props.topic}</Modal.Card.Title>
         </Modal.Card.Header>
         <Modal.Card.Body>
           <Columns>
-            <Columns.Column size="one-third">
+            <Columns.Column>
               <Level>
                 <Level.Item>
-                  <div>
-                    <p className="title">{props.text}</p>
-                  </div>
+                  <p className="title">{props.text}</p>
                 </Level.Item>
               </Level>
 
@@ -42,7 +40,7 @@ const ClockModal: React.FC<ClockModalProps> = (props) => {
             </Columns.Column>
           </Columns>
           <Columns>
-            <Columns.Column size="one-third">
+            <Columns.Column>
               <Button.Group>
                 <Button onClick={props.stopClock}>
                   <Icon>
