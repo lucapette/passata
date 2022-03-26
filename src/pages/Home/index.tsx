@@ -1,6 +1,6 @@
 import "bulma/css/bulma.min.css";
 import React, { useEffect, useState } from "react";
-import { Columns, Form } from "react-bulma-components";
+import { Columns, Container, Form, Section } from "react-bulma-components";
 import Pomodoro from "../../models/pomodoro";
 import Timer from "../../services/timer";
 import ClockModal from "./ClockModal";
@@ -16,12 +16,12 @@ enum ClockState {
 const pomodoros: Pomodoro[] = [
   {
     topic: "client 1",
-    completedAt: Date.parse("2022/03/23 08:00"),
+    completedAt: Date.now(),
     duration: 25 * 60,
   },
   {
     topic: "client 2",
-    completedAt: Date.parse("2022/03/23 08:30"),
+    completedAt: Date.now() - 10000000,
     duration: 25 * 60,
   },
 ];
@@ -78,8 +78,8 @@ const Home = () => {
   };
   return (
     <>
-      <Columns>
-        <Columns.Column size="one-third">
+      <Section>
+        <Container>
           <Form.Input
             placeholder="What are you working on today?"
             onKeyDown={onKeyDown}
@@ -87,11 +87,15 @@ const Home = () => {
             value={topic}
             disabled={clockState === ClockState.RUNNING}
           />
-        </Columns.Column>
-        <Columns.Column size="two-thirds">
-          <PomodoroList data={pomodoros} />
-        </Columns.Column>
-      </Columns>
+        </Container>
+      </Section>
+      <Section>
+        <Columns>
+          <Columns.Column size="two-thirds">
+            <PomodoroList data={pomodoros} />
+          </Columns.Column>
+        </Columns>
+      </Section>
       <ClockModal
         topic={topic}
         show={clockState === ClockState.RUNNING}

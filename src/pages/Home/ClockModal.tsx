@@ -1,12 +1,5 @@
 import { StopCircle } from "lucide-react";
-import {
-  Button,
-  Columns,
-  Icon,
-  Level,
-  Modal,
-  Progress,
-} from "react-bulma-components";
+import { Button, Icon, Modal, Progress } from "react-bulma-components";
 
 type ClockModalProps = {
   show: boolean;
@@ -21,35 +14,23 @@ const ClockModal: React.FC<ClockModalProps> = (props) => {
     <Modal show={props.show}>
       <Modal.Card>
         <Modal.Card.Header showClose={false}>
-          <Modal.Card.Title>{props.topic}</Modal.Card.Title>
+          <Modal.Card.Title className="has-text-centered">
+            Working on: {props.topic}
+          </Modal.Card.Title>
         </Modal.Card.Header>
-        <Modal.Card.Body>
-          <Columns>
-            <Columns.Column>
-              <Level>
-                <Level.Item>
-                  <p className="title">{props.text}</p>
-                </Level.Item>
-              </Level>
+        <Modal.Card.Body className="has-text-centered">
+          <p className="title">{props.text}</p>
 
-              <Progress
-                max={100}
-                value={props.progress}
-                color={props.progress === 100 ? "success" : "primary"}
-              ></Progress>
-            </Columns.Column>
-          </Columns>
-          <Columns>
-            <Columns.Column>
-              <Button.Group>
-                <Button onClick={props.stopClock}>
-                  <Icon>
-                    <StopCircle />
-                  </Icon>
-                </Button>
-              </Button.Group>
-            </Columns.Column>
-          </Columns>
+          <Progress
+            max={100}
+            value={props.progress}
+            color={props.progress === 100 ? "success" : "primary"}
+          ></Progress>
+          <Button onClick={props.stopClock}>
+            <Icon>
+              <StopCircle />
+            </Icon>
+          </Button>
         </Modal.Card.Body>
       </Modal.Card>
     </Modal>

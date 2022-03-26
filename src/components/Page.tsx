@@ -1,5 +1,4 @@
 import { useEffect } from "react";
-import { Content, Section } from "react-bulma-components";
 import Footer from "./Footer";
 import Navigation from "./Navigation";
 
@@ -15,9 +14,7 @@ const Page: React.FC<PageProps> = (props) => {
     <>
       <div className="wrap">
         <Navigation></Navigation>
-        <Section>
-          <Content>{props.children}</Content>
-        </Section>
+        {props.children}
       </div>
       <Footer />
     </>
