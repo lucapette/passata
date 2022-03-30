@@ -10,7 +10,7 @@ Cook your pomodoros!
 ## Current status of the project
 
 `passata` is a small application for the pomodoro technique. I'm using it as a
-playground.
+playground for the articles I publish on my website.
 
 # License
 
