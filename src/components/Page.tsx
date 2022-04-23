@@ -4,6 +4,7 @@ import Navigation from "./Navigation";
 
 type PageProps = {
   title: string;
+  children?: React.ReactNode;
 };
 
 const Page: React.FC<PageProps> = (props) => {
