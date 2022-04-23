@@ -1,17 +1,11 @@
 import "bulma/css/bulma.min.css";
 import React, { useEffect, useState } from "react";
 import { Columns, Container, Form, Section } from "react-bulma-components";
-import Pomodoro from "../../models/pomodoro";
+import Pomodoro from "../../types/pomodoro";
 import Timer from "../../services/timer";
 import ClockModal from "./ClockModal";
 import PomodoroList from "./PomodoroList";
-
-enum ClockState {
-  NOT_READY,
-  READY,
-  RUNNING,
-  DONE,
-}
+import { ClockState } from "../../types/clock";
 
 const pomodoros: Pomodoro[] = [
   {
@@ -30,38 +24,78 @@ const timer = new Timer();
 
 const Home = () => {
   useEffect(() => {
-    const title = document.title.split(" - ").at(-1);
-
-    document.title = `${clockText} - ${title}`;
+    if (
+      clock.state === ClockState.WORKING ||
+      clock.state === ClockState.RESTING
+    ) {
+      document.title = clock.value;
+    } else {
+      document.title = "Get it done!";
+    }
   });
-  const [clockText, setClockText] = useState("25:00");
-  const [progress, setProgress] = useState(0);
+
+  const [task, setTask] = useState("");
+
+  const [clock, setClock] = useState({
+    state: ClockState.NOT_READY,
+    title: "",
+    value: "",
+    progress: 0,
+  });
 
   timer.on("tick", () => {
-    setProgress((timer.elapsed / timer.secondsToRun) * 100);
-    setClockText(timer.clockFormat() + "");
+    setClock({
+      ...clock,
+      progress: (timer.elapsed / timer.secondsToRun) * 100,
+      value: timer.clockFormat() + "",
+    });
   });
 
   timer.on("done", () => {
-    setClockState(ClockState.DONE);
-    setClockText("🎉");
-    setTopic("");
+    setClock({
+      ...clock,
+      progress: 100,
+      state:
+        clock.state === ClockState.WORKING
+          ? ClockState.DONE_WORKING
+          : ClockState.NOT_READY,
+      value: "🎉",
+    });
   });
 
-  const [clockState, setClockState] = useState(ClockState.NOT_READY);
-  const [topic, setTopic] = useState("");
-
   const startPomodoro = () => {
-    setClockState(ClockState.RUNNING);
-    timer.start();
+    setClock({
+      ...clock,
+      title: task,
+      value: "25:00", //TODO: use the timer function
+      state:
+        clock.state === ClockState.READY
+          ? ClockState.WORKING
+          : ClockState.RESTING,
+    });
+    timer.start(5);
+    setTask("");
+  };
+
+  const startBreak = () => {
+    setClock({
+      ...clock,
+      state: ClockState.RESTING,
+      title: "☕️☕️☕️",
+      progress: 0,
+    });
+    timer.start(5);
   };
 
   const stopPomodoro = () => {
-    setClockState(ClockState.NOT_READY);
     timer.stop();
-    setTopic("");
-    setProgress(0);
-    setClockText("25:00");
+
+    setClock({
+      state: ClockState.NOT_READY,
+      title: "",
+      value: "25:00", //TODO: use the timer function
+      progress: 0,
+    });
   };
 
   const onKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -71,10 +105,14 @@ const Home = () => {
   };
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setTopic(e.currentTarget.value);
-    setClockState(
-      e.currentTarget.value.length > 0 ? ClockState.READY : ClockState.NOT_READY
-    );
+    setTask(e.currentTarget.value);
+    setClock({
+      ...clock,
+      state:
+        e.currentTarget.value.length > 0
+          ? ClockState.READY
+          : ClockState.NOT_READY,
+    });
   };
   return (
     <>
@@ -84,8 +122,7 @@ const Home = () => {
             placeholder="What are you working on today?"
             onKeyDown={onKeyDown}
             onChange={onChange}
-            value={topic}
-            disabled={clockState === ClockState.RUNNING}
+            value={task}
           />
         </Container>
       </Section>
@@ -97,11 +134,9 @@ const Home = () => {
         </Columns>
       </Section>
       <ClockModal
-        topic={topic}
-        show={clockState === ClockState.RUNNING}
-        progress={progress}
-        text={clockText}
+        clock={clock}
         stopClock={stopPomodoro}
+        startBreak={startBreak}
       />
     </>
   );

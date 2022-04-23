@@ -1,36 +1,50 @@
-import { StopCircle } from "lucide-react";
+import { StopCircle, PlayCircle } from "lucide-react";
 import { Button, Icon, Modal, Progress } from "react-bulma-components";
+import { Clock, ClockState } from "../../types/clock";
 
 type ClockModalProps = {
-  show: boolean;
-  text: string;
-  progress: number;
+  clock: Clock;
   stopClock: () => void;
-  topic: string;
+  startBreak: () => void;
 };
 
 const ClockModal: React.FC<ClockModalProps> = (props) => {
   return (
-    <Modal show={props.show}>
+    <Modal
+      show={
+        props.clock.state !== ClockState.NOT_READY &&
+        props.clock.state !== ClockState.READY
+      }
+    >
       <Modal.Card>
         <Modal.Card.Header showClose={false}>
           <Modal.Card.Title className="has-text-centered">
-            Working on: {props.topic}
+            {props.clock.title}
           </Modal.Card.Title>
         </Modal.Card.Header>
         <Modal.Card.Body className="has-text-centered">
-          <p className="title">{props.text}</p>
+          <p className="title">{props.clock.value}</p>
 
           <Progress
             max={100}
-            value={props.progress}
-            color={props.progress === 100 ? "success" : "primary"}
+            value={props.clock.progress}
+            color={props.clock.progress === 100 ? "success" : "primary"}
           ></Progress>
-          <Button onClick={props.stopClock}>
-            <Icon>
-              <StopCircle />
-            </Icon>
-          </Button>
+          {(props.clock.state === ClockState.WORKING ||
+            props.clock.state === ClockState.RESTING) && (
+            <Button onClick={props.stopClock}>
+              <Icon>
+                <StopCircle />
+              </Icon>
+            </Button>
+          )}
+          {props.clock.state === ClockState.DONE_WORKING && (
+            <Button onClick={props.startBreak}>
+              <Icon>
+                <PlayCircle />
+              </Icon>
+            </Button>
+          )}
         </Modal.Card.Body>
       </Modal.Card>
     </Modal>

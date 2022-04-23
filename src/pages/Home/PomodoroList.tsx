@@ -1,6 +1,6 @@
 import { formatDistance } from "date-fns";
 import { Box, Columns, Media, Tag } from "react-bulma-components";
-import Pomodoro from "../../models/pomodoro";
+import Pomodoro from "../../types/pomodoro";
 
 type PomodoroListProps = {
   data: Pomodoro[];
@@ -10,8 +10,8 @@ const PomodoroList: React.FC<PomodoroListProps> = (props) => {
   const today = new Date();
   return (
     <Columns>
-      {props.data.map((pomodoro) => (
-        <Columns.Column size={4}>
+      {props.data.map((pomodoro, index) => (
+        <Columns.Column size={4} key={index}>
           <Box>
             <Media>
               <Media.Item>
