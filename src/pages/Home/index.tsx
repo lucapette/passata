@@ -5,29 +5,20 @@ import Pomodoro from "../../types/pomodoro";
 import Timer from "../../services/timer";
 import ClockModal from "./ClockModal";
 import PomodoroList from "./PomodoroList";
-import { ClockState } from "../../types/clock";
-
-const pomodoros: Pomodoro[] = [
-  {
-    topic: "client 1",
-    completedAt: Date.now(),
-    duration: 25 * 60,
-  },
-  {
-    topic: "client 2",
-    completedAt: Date.now() - 10000000,
-    duration: 25 * 60,
-  },
-];
+import { ClockState, isClockRunning } from "../../types/clock";
+import { addPomodoro } from "../../slices/pomodoroSlice";
+import { useAppDispatch, useAppSelector } from "../../store";
 
 const timer = new Timer();
 
 const Home = () => {
+  const dispatch = useAppDispatch();
+  const pomodoros = useAppSelector((state) => state.pomodoro.pomodoros);
+  const savePomodoro = (pomodoro: Pomodoro) => {
+    dispatch(addPomodoro(pomodoro));
+  };
   useEffect(() => {
-    if (
-      clock.state === ClockState.WORKING ||
-      clock.state === ClockState.RESTING
-    ) {
+    if (isClockRunning(clock)) {
       document.title = clock.value;
     } else {
       document.title = "Get it done!";
@@ -52,6 +43,13 @@ const Home = () => {
   });
 
   timer.on("done", () => {
+    if (clock.state === ClockState.WORKING) {
+      savePomodoro({
+        label: clock.title,
+        duration: timer.secondsToRun,
+        completedAt: Date.now(),
+      });
+    }
     setClock({
       ...clock,
       progress: 100,
@@ -114,6 +112,7 @@ const Home = () => {
           : ClockState.NOT_READY,
     });
   };
+
   return (
     <>
       <Section>

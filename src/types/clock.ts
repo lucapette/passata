@@ -12,3 +12,9 @@ export interface Clock {
   value: string;
   progress: number;
 }
+
+export const isClockRunning = (clock: Clock) => {
+  return (
+    clock.state === ClockState.WORKING || clock.state === ClockState.RESTING
+  );
+};

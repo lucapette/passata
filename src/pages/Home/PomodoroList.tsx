@@ -16,7 +16,7 @@ const PomodoroList: React.FC<PomodoroListProps> = (props) => {
             <Media>
               <Media.Item>
                 {pomodoro.duration / 60} minutes spent on{" "}
-                <Tag>{pomodoro.topic}</Tag>
+                <Tag>{pomodoro.label}</Tag>
                 {formatDistance(pomodoro.completedAt, today, {
                   addSuffix: true,
                 })}

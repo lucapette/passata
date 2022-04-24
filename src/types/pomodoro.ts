@@ -1,5 +1,5 @@
 interface Pomodoro {
-  topic: string;
+  label: string;
   completedAt: number;
   duration: number;
 }
