@@ -1,4 +1,3 @@
-import "bulma/css/bulma.min.css";
 import React, { useEffect, useRef, useState } from "react";
 import Pomodoro from "../../types/pomodoro";
 import Timer from "../../services/timer";

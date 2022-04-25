@@ -14,8 +14,8 @@ const Navigation = () => {
         <NavLink className={navItemStyle} to="/stats">
           📈 Stats
         </NavLink>
-        <NavLink className={navItemStyle} to="/settings">
-          ⚙️ Settings
+        <NavLink className={navItemStyle} to="/labels">
+          🏷 Labels
         </NavLink>
       </div>
     </div>

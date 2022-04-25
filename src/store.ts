@@ -1,10 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 import pomodoroReducer from "./slices/pomodoroSlice";
+import labelReducer from "./slices/labelSlice";
 
 export const store = configureStore({
   reducer: {
     pomodoro: pomodoroReducer,
+    label: labelReducer,
   },
 });
 
