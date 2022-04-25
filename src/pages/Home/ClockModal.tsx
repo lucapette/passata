@@ -1,5 +1,4 @@
 import { StopCircle, PlayCircle } from "lucide-react";
-import { Button, Icon, Modal, Progress } from "react-bulma-components";
 import { Clock, ClockState, isClockRunning } from "../../types/clock";
 
 type ClockModalProps = {
@@ -8,48 +7,50 @@ type ClockModalProps = {
   startBreak: () => void;
 };
 
+const isActive = (clock: Clock) =>
+  isClockRunning(clock) || clock.state === ClockState.DONE_WORKING;
+
 const ClockModal: React.FC<ClockModalProps> = ({
   clock,
   stopClock,
   startBreak,
 }) => {
   return (
-    <Modal
-      show={
-        clock.state !== ClockState.NOT_READY && clock.state !== ClockState.READY
-      }
-    >
-      <Modal.Card>
-        <Modal.Card.Header showClose={false}>
-          <Modal.Card.Title className="has-text-centered">
+    <div className={`modal ${isActive(clock) ? "is-active" : ""}`}>
+      <div role="presentation" className="modal-background" />
+      <div className="modal-card">
+        <div className="modal-card-head">
+          <div className="modal-card-title has-text-centered">
             {clock.title}
-          </Modal.Card.Title>
-        </Modal.Card.Header>
-        <Modal.Card.Body className="has-text-centered">
+          </div>
+        </div>
+        <div className="modal-card-body has-text-centered">
           <p className="title">{clock.value}</p>
 
-          <Progress
+          <progress
+            className={`progress ${
+              clock.progress === 100 ? "is-success" : "is-primary"
+            }`}
             max={100}
             value={clock.progress}
-            color={clock.progress === 100 ? "success" : "primary"}
-          ></Progress>
+          ></progress>
           {isClockRunning(clock) && (
-            <Button onClick={stopClock}>
-              <Icon>
+            <button className="button" onClick={stopClock}>
+              <span className="icon">
                 <StopCircle />
-              </Icon>
-            </Button>
+              </span>
+            </button>
           )}
           {clock.state === ClockState.DONE_WORKING && (
-            <Button onClick={startBreak}>
-              <Icon>
+            <button className="button" onClick={startBreak}>
+              <span className="icon">
                 <PlayCircle />
-              </Icon>
-            </Button>
+              </span>
+            </button>
           )}
-        </Modal.Card.Body>
-      </Modal.Card>
-    </Modal>
+        </div>
+      </div>
+    </div>
   );
 };
 

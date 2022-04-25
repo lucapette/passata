@@ -1,6 +1,5 @@
 import "bulma/css/bulma.min.css";
-import React, { useEffect, useState } from "react";
-import { Columns, Container, Form, Section } from "react-bulma-components";
+import React, { useEffect, useRef, useState } from "react";
 import Pomodoro from "../../types/pomodoro";
 import Timer from "../../services/timer";
 import ClockModal from "./ClockModal";
@@ -24,7 +23,6 @@ const Home = () => {
       document.title = "Get it done!";
     }
   });
-
   const [task, setTask] = useState("");
 
   const [clock, setClock] = useState({
@@ -33,6 +31,8 @@ const Home = () => {
     value: "",
     progress: 0,
   });
+
+  const ref = useRef<HTMLInputElement>(null);
 
   timer.on("tick", () => {
     setClock({
@@ -57,7 +57,7 @@ const Home = () => {
         clock.state === ClockState.WORKING
           ? ClockState.DONE_WORKING
           : ClockState.NOT_READY,
-      value: "🎉",
+      value: "🎉🎉🎉",
     });
   });
 
@@ -73,6 +73,7 @@ const Home = () => {
     });
     timer.start(5);
     setTask("");
+    ref.current?.blur();
   };
 
   const startBreak = () => {
@@ -115,23 +116,25 @@ const Home = () => {
 
   return (
     <>
-      <Section>
-        <Container>
-          <Form.Input
+      <section className="section">
+        <form className="form">
+          <input
+            className="input"
+            ref={ref}
             placeholder="What are you working on today?"
             onKeyDown={onKeyDown}
             onChange={onChange}
             value={task}
           />
-        </Container>
-      </Section>
-      <Section>
-        <Columns>
-          <Columns.Column size="two-thirds">
+        </form>
+      </section>
+      <section className="section">
+        <div className="columns">
+          <div className="column two-thirds">
             <PomodoroList data={pomodoros} />
-          </Columns.Column>
-        </Columns>
-      </Section>
+          </div>
+        </div>
+      </section>
       <ClockModal
         clock={clock}
         stopClock={stopPomodoro}

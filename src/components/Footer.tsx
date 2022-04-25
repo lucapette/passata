@@ -1,18 +1,16 @@
-import { Content, Footer as BulmaFooter, Level } from "react-bulma-components";
-
 const Footer = () => {
   return (
-    <BulmaFooter>
-      <Level>
-        <Level.Side align="left">
-          <Level.Item>
-            <Content>
+    <footer className="footer">
+      <div className="level">
+        <div className="level-left">
+          <div className="level-item">
+            <div className="content">
               Built with ♥️ by <a href="https://lucapette.me">lucapette</a>
-            </Content>
-          </Level.Item>
-        </Level.Side>
-      </Level>
-    </BulmaFooter>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
   );
 };
 

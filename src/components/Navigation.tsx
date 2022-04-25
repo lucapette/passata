@@ -1,4 +1,3 @@
-import { Navbar } from "react-bulma-components";
 import { NavLink } from "react-router-dom";
 
 const navItemStyle = ({ isActive }: { isActive: Boolean }) => {
@@ -7,21 +6,19 @@ const navItemStyle = ({ isActive }: { isActive: Boolean }) => {
 
 const Navigation = () => {
   return (
-    <Navbar color="light">
-      <Navbar.Container>
-        <Navbar.Menu>
-          <NavLink className={navItemStyle} to="/">
-            🍅 Get it done
-          </NavLink>
-          <NavLink className={navItemStyle} to="/stats">
-            📈 Stats
-          </NavLink>
-          <NavLink className={navItemStyle} to="/settings">
-            ⚙️ Settings
-          </NavLink>
-        </Navbar.Menu>
-      </Navbar.Container>
-    </Navbar>
+    <div className="navbar is-light">
+      <div className="navbar-menu">
+        <NavLink className={navItemStyle} to="/">
+          🍅 Get it done
+        </NavLink>
+        <NavLink className={navItemStyle} to="/stats">
+          📈 Stats
+        </NavLink>
+        <NavLink className={navItemStyle} to="/settings">
+          ⚙️ Settings
+        </NavLink>
+      </div>
+    </div>
   );
 };
 
