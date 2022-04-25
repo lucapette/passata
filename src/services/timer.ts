@@ -7,17 +7,15 @@ class Timer {
   callbacks: Map<CallbackType, Callback>;
   interval?: number;
 
-  constructor() {
+  constructor(seconds: number) {
     this.callbacks = new Map();
-    this.secondsToRun = 0;
+    this.secondsToRun = seconds;
     this.elapsed = 0;
     this.interval = undefined;
   }
 
-  start(seconds: number = 25 * 60) {
-    this.secondsToRun = seconds;
-    this.elapsed = 0;
-
+  start(seconds: number) {
+    this.reset(seconds);
     let start = Date.now();
     let lastElapsed = 0;
 
@@ -53,11 +51,12 @@ class Timer {
     return this.interval !== undefined;
   }
 
-  clockFormat() {
-    if (!this.isRunning()) {
-      return;
-    }
+  reset(seconds: number) {
+    this.secondsToRun = seconds;
+    this.elapsed = 0;
+  }
 
+  clockFormat() {
     let secondsLeft = this.secondsToRun - this.elapsed;
     let minutes = Math.floor(secondsLeft / 60);
     let seconds = secondsLeft % 60;

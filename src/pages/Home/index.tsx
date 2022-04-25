@@ -8,7 +8,7 @@ import { ClockState, isClockRunning } from "../../types/clock";
 import { addPomodoro } from "../../slices/pomodoroSlice";
 import { useAppDispatch, useAppSelector } from "../../store";
 
-const timer = new Timer();
+const timer = new Timer(25 * 60);
 
 const Home = () => {
   const dispatch = useAppDispatch();
@@ -65,7 +65,7 @@ const Home = () => {
     setClock({
       ...clock,
       title: task,
-      value: "25:00", //TODO: use the timer function
+      value: timer.clockFormat(),
       state:
         clock.state === ClockState.READY
           ? ClockState.WORKING
@@ -77,11 +77,13 @@ const Home = () => {
   };
 
   const startBreak = () => {
+    timer.reset(5);
     setClock({
       ...clock,
       state: ClockState.RESTING,
       title: "☕️☕️☕️",
       progress: 0,
+      value: timer.clockFormat(),
     });
     timer.start(5);
   };
@@ -92,7 +94,7 @@ const Home = () => {
     setClock({
       state: ClockState.NOT_READY,
       title: "",
-      value: "25:00", //TODO: use the timer function
+      value: "",
       progress: 0,
     });
   };

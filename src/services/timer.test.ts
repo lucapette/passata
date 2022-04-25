@@ -10,7 +10,7 @@ beforeEach(() => {
 });
 
 test("it ticks correctly", () => {
-  const timer = new Timer();
+  const timer = new Timer(1);
 
   const tick = jest.fn();
 
@@ -24,7 +24,7 @@ test("it ticks correctly", () => {
 });
 
 test("it finishes correctly", () => {
-  const timer = new Timer();
+  const timer = new Timer(1);
 
   const done = jest.fn();
 
@@ -38,7 +38,7 @@ test("it finishes correctly", () => {
 });
 
 test("it stops correctly", () => {
-  const timer = new Timer();
+  const timer = new Timer(25 * 60);
 
   const tick = jest.fn();
 
@@ -56,14 +56,8 @@ test("it stops correctly", () => {
 });
 
 describe("clockFormat", () => {
-  test("returns undefined when not running", () => {
-    const timer = new Timer();
-
-    expect(timer.clockFormat()).toBeUndefined();
-  });
-
   test("formats no elapsed time correctly", () => {
-    const timer = new Timer();
+    const timer = new Timer(60);
 
     timer.start(60);
 
@@ -71,9 +65,9 @@ describe("clockFormat", () => {
   });
 
   test("formats elapsed time correctly", () => {
-    const timer = new Timer();
+    const timer = new Timer(25 * 60);
 
-    timer.start();
+    timer.start(25 * 60);
 
     jest.advanceTimersByTime(1000);
 
