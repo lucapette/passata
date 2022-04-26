@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { ulid } from "ulid";
 import { Label } from "../types/label";
 
 interface LabelState {
@@ -16,11 +17,11 @@ export const labelSlice = createSlice({
     loadLabels: (state) => {
       state.labels = [
         {
-          id: "662CB9B8-5A71-4B74-A628-2AAEC53249CC",
+          id: ulid(),
           value: "client 1",
         },
         {
-          id: "38D32CCF-3F4C-49F6-BB5D-D184FC0185CB",
+          id: ulid(),
           value: "client 2",
         },
       ];

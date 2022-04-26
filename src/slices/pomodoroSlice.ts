@@ -16,12 +16,12 @@ export const pomodoroSlice = createSlice({
     loadPomodoros: (state) => {
       state.pomodoros = [
         {
-          label: "client 1",
+          label: "client_1",
           completedAt: Date.now(),
           duration: 25 * 60,
         },
         {
-          label: "client 2",
+          label: "client_2",
           completedAt: Date.now() - 10000000,
           duration: 25 * 60,
         },
