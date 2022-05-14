@@ -18,11 +18,11 @@ export const labelSlice = createSlice({
       state.labels = [
         {
           id: ulid(),
-          value: "client 1",
+          value: "client_1",
         },
         {
           id: ulid(),
-          value: "client 2",
+          value: "client_2",
         },
       ];
     },
