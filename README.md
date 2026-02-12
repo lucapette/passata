@@ -1,5 +1,7 @@
 # Passata
 
+> **Archived**: This repository has been moved to [code/passata](https://github.com/lucapette/code/tree/main/passata)
+
 Cook your pomodoros!
 
 ## Current status of the project
